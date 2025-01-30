@@ -1,0 +1,35 @@
+{
+    "colors": [
+      { "name": "Red-Black", "hex": "#FF0000" }, 
+      { "name": "White Blue Red", "hex": "#FFFFFF" }, 
+      { "name": "Blue", "hex": "#0000FF" }, 
+      { "name": "Grey Pink", "hex": "#D3D3D3" }, 
+      { "name": "Dark Grey", "hex": "#A9A9A9" }, 
+      { "name": "Multicolor", "hex": "#FF69B4" }, 
+      { "name": "White Red", "hex": "#FFCCCC" }, 
+      { "name": "Light Grey", "hex": "#D3D3D3" }, 
+      { "name": "Pink", "hex": "#FFC0CB" }, 
+      { "name": "Purple", "hex": "#800080" }, 
+      { "name": "Turkish", "hex": "#30D5C8" }, 
+      { "name": "Yellow", "hex": "#FFFF00" }, 
+      { "name": "Orange", "hex": "#FFA500" }, 
+      { "name": "Wine", "hex": "#722F37" }, 
+      { "name": "Olive Green", "hex": "#556B2F" }, 
+      { "name": "Maroon", "hex": "#800000" }, 
+      { "name": "Multicolors1", "hex": "#FF69B4" }, 
+      { "name": "Red", "hex": "#FF0000" }, 
+      { "name": "White Blue", "hex": "#A4C8E1" }, 
+      { "name": "Green", "hex": "#008000" }, 
+      { "name": "Teal Blue", "hex": "#008080" }, 
+      { "name": "Navy Blue", "hex": "#000080" }, 
+      { "name": "Sea Green", "hex": "#2E8B57" }, 
+      { "name": "Solid", "hex":"#000000"},
+      { "name":"Brown","hex":"#A52A2A"},
+      { "name":"Off White","hex":"#F8F8FF"},
+      { "name":"Mustard","hex":"#FFDB58"},
+      { "name":"Grey","hex":"#808080"},
+      { "name":"White-Brown","hex":"#D7C49E"},
+      { "name":"Black","hex":"#000000"}
+    ]
+  }
+  

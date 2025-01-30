@@ -1,0 +1,142 @@
+
+import React from "react"
+import { FaFacebookF, FaInstagram, FaYoutube, FaPinterest } from "react-icons/fa"
+import { motion } from "framer-motion"
+
+const Footer = () => {
+  return (
+    <footer className="bg-gradient-to-r from-[#2C2C2C] to-[#3A3A3A] text-[#F8F8F8] py-16">
+      <div className="container mx-auto px-4">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
+          {/* Left Section */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5 }}
+            className="text-center md:text-left"
+          >
+            <img
+              src="/adaa-logo.png"
+              alt="Adaa Jaipur Logo"
+              className="w-32 mx-auto md:mx-0 mb-6 shadow-lg"
+            />
+            <h3 className="text-xl font-semibold mb-4">Contact Us</h3>
+            <p className="mb-2">
+              <span className="font-medium">Email:</span> adaajaipur4india@gmail.com
+            </p>
+            <p className="mb-4">
+              <span className="font-medium">Phone:</span> +91 9828170003
+            </p>
+            <p className="font-medium mb-2">Address:</p>
+            <p>H-5, Riico Mansarovar Industrial Area</p>
+            <p>Jaipur - 302020, Rajasthan, India</p>
+          </motion.div>
+
+          {/* Center Section */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.2 }}
+            className="text-center"
+          >
+            <h3 className="text-xl font-semibold mb-6">Quick Links</h3>
+            <ul className="space-y-3">
+              <li>
+                <a href="/sale" className="hover:text-pink-500 transition-colors duration-300">
+                  Sale
+                </a>
+              </li>
+              <li>
+                <a href="/collections" className="hover:text-pink-500 transition-colors duration-300">
+                  Our Collections
+                </a>
+              </li>
+              <li>
+                <a href="/size-chart" className="hover:text-pink-500 transition-colors duration-300">
+                  Size Chart
+                </a>
+              </li>
+              <li>
+                <a href="/about" className="hover:text-pink-500 transition-colors duration-300">
+                  About Us
+                </a>
+              </li>
+              <li>
+                <a href="/contact" className="hover:text-pink-500 transition-colors duration-300">
+                  Contact Us
+                </a>
+              </li>
+            </ul>
+          </motion.div>
+
+          {/* Right Section */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.4 }}
+            className="text-center md:text-right"
+          >
+            <h3 className="text-xl font-semibold mb-6">Policies</h3>
+            <ul className="space-y-3">
+              <li>
+                <a href="/refund-policy" className="hover:text-pink-500 transition-colors duration-300">
+                  Refund Policy
+                </a>
+              </li>
+              <li>
+                <a href="/shipping-policy" className="hover:text-pink-500 transition-colors duration-300">
+                  Shipping Policy
+                </a>
+              </li>
+              <li>
+                <a href="/terms-of-service" className="hover:text-pink-500 transition-colors duration-300">
+                  Terms of Service
+                </a>
+              </li>
+              <li>
+                <a href="/privacy-policy" className="hover:text-pink-500 transition-colors duration-300">
+                  Privacy Policy
+                </a>
+              </li>
+            </ul>
+          </motion.div>
+        </div>
+
+        {/* Social Media Icons and Footer Bottom */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, delay: 0.6 }}
+          className="mt-12 text-center"
+        >
+          <div className="flex justify-center space-x-6 mb-8">
+            {[
+              { icon: FaFacebookF, href: "https://www.facebook.com/Adaajaipur.official?_rdr" },
+              { icon: FaInstagram, href: "https://www.instagram.com/adaajaipur.official/" },
+              { icon: FaYoutube, href: "https://www.youtube.com/channel/UC9Ccd68grj8EgEwHd3d8G_A" },
+              { icon: FaPinterest, href: "https://in.pinterest.com/adaajaipur/" },
+            ].map((social, index) => (
+              <motion.a
+                key={index}
+                href={social.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-2xl hover:text-pink-500 transition-colors duration-300"
+                whileHover={{ scale: 1.2 }}
+                whileTap={{ scale: 0.9 }}
+              >
+                <social.icon />
+              </motion.a>
+            ))}
+          </div>
+          <div className="border-t border-gray-600 pt-8">
+            <p className="text-sm">&copy; {new Date().getFullYear()} Adaa Jaipur. All rights reserved.</p>
+          </div>
+        </motion.div>
+      </div>
+    </footer>
+  )
+}
+
+export default Footer
+

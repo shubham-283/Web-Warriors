@@ -1,0 +1,15 @@
+/* index.css */
+
+/* Importing Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Comic+Neue:wght@400;700&display=swap');
+
+/* Tailwind CSS Base Styles */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Apply Comic Neue font globally */
+body {
+  font-family: 'Comic Neue', cursive; /* Apply Comic Neue font globally */
+  @apply bg-gray-100 text-gray-800; /* Example of applying additional styles */
+}
