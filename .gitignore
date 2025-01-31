@@ -11,6 +11,12 @@
 # production
 /build
 
+# Ignore environment and config files
+.env
+src/firebase-config.js
+src/auth-config.js
+src/.env
+
 # misc
 .DS_Store
 .env.local
