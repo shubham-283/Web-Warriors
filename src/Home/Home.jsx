@@ -5,6 +5,9 @@ import FeaturedProducts from "./HomeComponents/FeaturedProducts";
 import Modal from "./Modal/Modal";
 import { useCart } from "../hooks/useCart";
 import SurpriseComponent from "../SurpriseCustomer/SurpriseCustomer";
+import DiscoverAdaa from "./HomeComponents/DiscoverAdaa";
+import Features from "./HomeComponents/Features";
+import FindUsOn from "./HomeComponents/FindUs";
 
 // Memoize child components if they haven't been memoized already
 const MemoizedHero = memo(Hero);
@@ -44,6 +47,9 @@ const HomePage = ({ data, featuredProducts }) => {
         products={featuredProducts} 
         handleQuickView={handleQuickView} 
       />
+      <DiscoverAdaa/>
+      <Features/>
+      <FindUsOn/>
       {selectedProduct && (
         <Modal
           product={selectedProduct}

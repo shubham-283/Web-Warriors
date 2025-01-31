@@ -24,10 +24,15 @@ const ProductCard = memo(({ product, handleQuickView }) => (
 
 const FeaturedProducts = ({ products, handleQuickView }) => {
   return (
-    <section className="py-16 px-4 lg:px-8 text-center relative overflow-hidden">
+    <section className="py-24 px-6 lg:px-12 text-center relative overflow-hidden">
       <div
         className="absolute inset-0 bg-cover bg-center bg-no-repeat opacity-50 z-0"
-        style={{ backgroundImage: 'url("/pngwing.com[1].png")' }}
+        style={{
+          backgroundImage: 'url("/pngwing.com[1].png")',
+          backgroundSize: 'contain', // Prevent zooming on mobile
+          backgroundPosition: 'center',
+          backgroundRepeat: 'repeat',
+        }}
       />
       <div className="relative z-10">
         <h2 className="text-5xl font-bold mb-12 text-[#6B1E3C]">Featured Products</h2>

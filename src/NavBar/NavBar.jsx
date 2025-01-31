@@ -21,7 +21,6 @@ const NavbarAdaa = () => {
   let lastScrollY = 0
   const navigate = useNavigate()
 
-  // All the existing handler functions remain the same
   const handleClear = () => {
     setSearchQuery("")
   }
@@ -177,6 +176,7 @@ const NavbarAdaa = () => {
       <Link
         key={item.name}
         to={item.path}
+        onClick={() => isMobile && setIsSidebarOpen(false)}
         className={`relative group px-3 py-2 rounded-lg transition-all duration-300 
         ${isActive ? "text-pink-600" : "text-gray-700 hover:text-pink-600"}`}
       >
@@ -218,7 +218,9 @@ const NavbarAdaa = () => {
             </Link>
           </div>
 
-          <nav className="hidden lg:flex space-x-6">{navItems.map((item) => renderNavLink(item))}</nav>
+          <nav className="hidden lg:flex space-x-6">
+            {navItems.map((item) => renderNavLink(item))}
+          </nav>
 
           <div className="flex items-center space-x-4">
             {sideIcons.map(({ label, icon: Icon, path, action }, index) => (
@@ -242,7 +244,7 @@ const NavbarAdaa = () => {
             ))}
             <AccountDropdown />
             <a
-              href="https://wa.me/yournumber"
+              href="https://wa.me/9983170003"
               target="_blank"
               rel="noopener noreferrer"
               className="p-2 hover:bg-gray-100 rounded-full transition-colors block"
@@ -295,6 +297,7 @@ const NavbarAdaa = () => {
             <div className="mt-16 space-y-6">
               <Link
                 to="/wishlist"
+                onClick={() => setIsSidebarOpen(false)}
                 className="flex items-center space-x-2 text-gray-600 hover:text-pink-600 transition-colors"
               >
                 <FaRegHeart />
@@ -303,6 +306,7 @@ const NavbarAdaa = () => {
 
               <Link
                 to="/shoppingcart"
+                onClick={() => setIsSidebarOpen(false)}
                 className="flex items-center space-x-2 text-gray-600 hover:text-pink-600 transition-colors"
               >
                 <ShoppingBag className="" />
@@ -312,6 +316,7 @@ const NavbarAdaa = () => {
               {isAuthenticated && (
                 <Link
                   to="/account"
+                  onClick={() => setIsSidebarOpen(false)}
                   className="flex items-center space-x-2 text-gray-600 hover:text-pink-600 transition-colors"
                 >
                   <BiUser />
@@ -320,7 +325,10 @@ const NavbarAdaa = () => {
               )}
 
               <button
-                onClick={handleLoginLogout}
+                onClick={() => {
+                  handleLoginLogout();
+                  setIsSidebarOpen(false);
+                }}
                 className="flex items-center space-x-2 text-gray-600 hover:text-pink-600 transition-colors w-full"
               >
                 <BiLogOut />

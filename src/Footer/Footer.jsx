@@ -2,6 +2,7 @@
 import React from "react"
 import { FaFacebookF, FaInstagram, FaYoutube, FaPinterest } from "react-icons/fa"
 import { motion } from "framer-motion"
+import { Link } from "react-router-dom"
 
 const Footer = () => {
   return (
@@ -42,29 +43,29 @@ const Footer = () => {
             <h3 className="text-xl font-semibold mb-6">Quick Links</h3>
             <ul className="space-y-3">
               <li>
-                <a href="/sale" className="hover:text-pink-500 transition-colors duration-300">
+                <Link to="/sale" className="hover:text-pink-500 transition-colors duration-300">
                   Sale
-                </a>
+                </Link>
               </li>
               <li>
-                <a href="/collections" className="hover:text-pink-500 transition-colors duration-300">
+                <Link to="/products" className="hover:text-pink-500 transition-colors duration-300">
                   Our Collections
-                </a>
+                </Link>
               </li>
               <li>
-                <a href="/size-chart" className="hover:text-pink-500 transition-colors duration-300">
+                <Link to="/size-chart" className="hover:text-pink-500 transition-colors duration-300">
                   Size Chart
-                </a>
+                </Link>
               </li>
               <li>
-                <a href="/about" className="hover:text-pink-500 transition-colors duration-300">
+                <Link to="/about-us" className="hover:text-pink-500 transition-colors duration-300">
                   About Us
-                </a>
+                </Link>
               </li>
               <li>
-                <a href="/contact" className="hover:text-pink-500 transition-colors duration-300">
+                <Link to="/contact-us" className="hover:text-pink-500 transition-colors duration-300">
                   Contact Us
-                </a>
+                </Link>
               </li>
             </ul>
           </motion.div>
@@ -79,24 +80,24 @@ const Footer = () => {
             <h3 className="text-xl font-semibold mb-6">Policies</h3>
             <ul className="space-y-3">
               <li>
-                <a href="/refund-policy" className="hover:text-pink-500 transition-colors duration-300">
+                <Link to="/refund-policy" className="hover:text-pink-500 transition-colors duration-300">
                   Refund Policy
-                </a>
+                </Link>
               </li>
               <li>
-                <a href="/shipping-policy" className="hover:text-pink-500 transition-colors duration-300">
+                <Link to="/shipping-policy" className="hover:text-pink-500 transition-colors duration-300">
                   Shipping Policy
-                </a>
+                </Link>
               </li>
               <li>
-                <a href="/terms-of-service" className="hover:text-pink-500 transition-colors duration-300">
+                <Link to="/terms-of-service" className="hover:text-pink-500 transition-colors duration-300">
                   Terms of Service
-                </a>
+                </Link>
               </li>
               <li>
-                <a href="/privacy-policy" className="hover:text-pink-500 transition-colors duration-300">
+                <Link to="/privacy-policy" className="hover:text-pink-500 transition-colors duration-300">
                   Privacy Policy
-                </a>
+                </Link>
               </li>
             </ul>
           </motion.div>

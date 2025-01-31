@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { ChevronLeft, ChevronRight } from "lucide-react";
+import { Link } from "react-router-dom";
 
 const slides = [
   {
@@ -53,9 +54,11 @@ export default function Hero() {
             <div className="max-w-lg px-4 sm:px-6 md:px-8">
               <h2 className="text-3xl sm:text-4xl md:text-5xl font-semibold mb-4 drop-shadow-lg">{slide.title}</h2>
               <p className="text-base sm:text-lg md:text-xl mb-4">{slide.description}</p>
-              <button className="bg-[#FFC1C1] text-[#6B1E3C] px-6 py-2 rounded-full font-semibold hover:bg-[#FF5C8D] transition-all duration-300">
-                Shop Now
-              </button>
+              <Link to='/products'>
+  <button className="bg-[#FFC1C1] text-[#6B1E3C] px-6 py-2 rounded-full font-semibold hover:bg-[#FF5C8D] transition-all duration-300">
+    Shop Now
+  </button>
+</Link>
             </div>
           </div>
         </div>

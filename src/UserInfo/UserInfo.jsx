@@ -210,7 +210,7 @@ const UserProfile = () => {
 const InputField = ({ icon, label, name, value, readOnly, onChange, error }) => (
   <div className="mb-4">
     <div className="flex items-center">
-      <span className="text-white p-3 rounded-l-lg bg-gradient-to-r from-pink-500 to-fuchsia-500">
+      <span className="text-white p-3 rounded-l-lg bg-gradient-to-tl from-pink-300 to-pink-600">
         {icon}
       </span>
       <div className="w-full">

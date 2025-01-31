@@ -17,6 +17,12 @@ import SearchResults from './SearchResult/SearchResults.jsx';
 import ContactPage from './ContactPage/ContactPage.jsx';
 import useFeaturedProducts from "./hooks/useFeaturedProducts"; // Import the hook here
 import "./index.css"
+import SizeChart from './Footer/SizeChart/SizeChart.jsx';
+import RefundPolicy from './Footer/RefundPolicy/RefundPolicy.jsx';
+import ShippingPolicy from './Footer/ShippingPolicy/ShippingPolicy.jsx';
+import TermsOfService from './Footer/TermsOfService/TermsOfService.jsx';
+import PrivacyPolicy from './Footer/PrivacyPolicy/PrivacyPolicy.jsx';
+import SalePage from './Footer/Sale/Sale.jsx';
 
 const ScrollToTop = () => {
   const { pathname } = useLocation();
@@ -55,6 +61,12 @@ const App = () => {
               <Route path='/wishlist' element={<WishlistPage/>}/>
               <Route path="/search-results" element={<SearchResults productData={products} />} />
               <Route path='/contact-us' element={<ContactPage/>}/>
+              <Route path='/size-chart' element={<SizeChart/>}/>
+              <Route path='/refund-policy' element={<RefundPolicy/>}/>
+              <Route path='/shipping-policy' element={<ShippingPolicy/>}/>
+              <Route path='/terms-of-service' element={<TermsOfService/>}/>
+              <Route path='/privacy-policy' element={<PrivacyPolicy/>}/>
+              <Route path='/sale' element={<SalePage/>}/>
             </Routes>
           </WishlistProvider>
         </CartProvider>

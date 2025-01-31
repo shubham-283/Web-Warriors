@@ -1,9 +1,20 @@
 import React, { useState, useEffect } from 'react';
 import { CheckCircle, Package, MapPin, Gift, ArrowRight, ChevronDown, Stars } from 'lucide-react';
+import { useLocation } from 'react-router-dom';
 
 const OrderConfirmationPage = ({ orderNumber = "ORD123456789" }) => {
   const [activeSection, setActiveSection] = useState('timeline');
   const [showConfetti, setShowConfetti] = useState(true);
+
+  const ScrollToTop = () => {
+    const { pathname } = useLocation();
+  
+    useEffect(() => {
+        window.scrollTo(0, 0);
+    }, [pathname]);
+  
+    return null;
+  };
 
   useEffect(() => {
     const timer = setTimeout(() => setShowConfetti(false), 5000);
@@ -13,6 +24,8 @@ const OrderConfirmationPage = ({ orderNumber = "ORD123456789" }) => {
   const deliveryDate = new Date(new Date().setDate(new Date().getDate() + 5));
 
   return (
+    <>
+    <ScrollToTop/>
     <div className="min-h-screen bg-gradient-to-br from-pink-200 via-fuchsia-50 to-pink-200 pt-4">
       {/* Floating Confetti Effect */}
       {showConfetti && (
@@ -31,10 +44,10 @@ const OrderConfirmationPage = ({ orderNumber = "ORD123456789" }) => {
         <div className="relative overflow-hidden bg-white rounded-3xl shadow-xl mb-8 transform hover:scale-102 transition-transform">
           <div className="absolute inset-0 bg-gradient-to-r from-violet-100 to-fuchsia-100 opacity-50" />
           <div className="relative p-8 text-center">
-            <div className="inline-flex items-center justify-center w-20 h-20 mb-6 bg-gradient-to-r from-pink-500 to-fuchsia-500 rounded-full">
+            <div className="inline-flex items-center justify-center w-20 h-20 mb-6 bg-gradient-to-r from-pink-500 to-pink-500 rounded-full">
               <CheckCircle className="w-12 h-12 text-white" />
             </div>
-            <h1 className="text-3xl font-bold bg-gradient-to-r from-pink-600 to-fuchsia-600 bg-clip-text text-transparent">
+            <h1 className="text-3xl font-bold bg-gradient-to-r from-pink-600 to-pink-500 bg-clip-text text-transparent">
               Your Order is Confirmed!
             </h1>
             <p className="mt-2 text-gray-600">Order #{orderNumber}</p>
@@ -49,7 +62,7 @@ const OrderConfirmationPage = ({ orderNumber = "ORD123456789" }) => {
                 <div key={step} className="relative">
                   <div className="flex items-center">
                     <div className={`flex-shrink-0 w-12 h-12 rounded-full flex items-center justify-center ${
-                      index === 0 ? 'bg-gradient-to-r from-pink-500 to-fuchsia-600' : 'bg-gray-200'
+                      index === 0 ? 'bg-gradient-to-r from-pink-500 to-pink-500' : 'bg-gray-200'
                     }`}>
                       {index === 0 && <CheckCircle className="w-6 h-6 text-white" />}
                       {index === 1 && <Package className="w-6 h-6 text-gray-400" />}
@@ -95,7 +108,7 @@ const OrderConfirmationPage = ({ orderNumber = "ORD123456789" }) => {
 
         {/* Action Buttons */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-          <button className="group bg-gradient-to-r from-pink-600 to-fuchsia-600 text-white py-4 px-6 rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 flex items-center justify-center">
+          <button className="group bg-gradient-to-r from-pink-600 to-pink-600 text-white py-4 px-6 rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 flex items-center justify-center">
             <span className="mr-2">Track Order</span>
             <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
           </button>
@@ -106,6 +119,7 @@ const OrderConfirmationPage = ({ orderNumber = "ORD123456789" }) => {
         </div>
       </div>
     </div>
+    </>
   );
 };
 
