@@ -1,3 +1,4 @@
+/** @type {import('tailwindcss').Config} */
 module.exports = {
   mode: 'jit',
   content: ['./src/**/*.{html,js,jsx,ts,tsx}'], // Adjust paths based on your project structure
@@ -44,6 +45,11 @@ module.exports = {
         lg: "var(--radius)",
         md: "calc(var(--radius) - 2px)",
         sm: "calc(var(--radius) - 4px)",
+      },
+       fontFamily: {
+        'yatra-one': ['Yatra One', 'sans-serif'],
+        'cormorant': ['Cormorant Garamond', 'serif'],
+        'quicksand': ['Quicksand', 'sans-serif'],
       },
     },
   },

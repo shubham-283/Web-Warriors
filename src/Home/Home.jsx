@@ -8,6 +8,8 @@ import SurpriseComponent from "../SurpriseCustomer/SurpriseCustomer";
 import DiscoverAdaa from "./HomeComponents/DiscoverAdaa";
 import Features from "./HomeComponents/Features";
 import FindUsOn from "./HomeComponents/FindUs";
+import OrderTracking from "../ProductTracking/ProductTracking";
+import VideoGallery from "./HomeComponents/VideoGallery";
 
 // Memoize child components if they haven't been memoized already
 const MemoizedHero = memo(Hero);
@@ -39,7 +41,7 @@ const HomePage = ({ data, featuredProducts }) => {
   }, []);
 
   return (
-    <main className="bg-gradient-to-br from-[#F2E4D8] via-[#F8C8C2] to-[#F6A8B2] text-white">
+    <main className="bg-pink-100 bg-opacity-80">
       <MemoizedSurpriseComponent />
       <MemoizedHero />
       <MemoizedFeaturedCategories productData={data} />
@@ -47,9 +49,11 @@ const HomePage = ({ data, featuredProducts }) => {
         products={featuredProducts} 
         handleQuickView={handleQuickView} 
       />
+      <VideoGallery/>
       <DiscoverAdaa/>
       <Features/>
       <FindUsOn/>
+      {/* <OrderTracking/> */}
       {selectedProduct && (
         <Modal
           product={selectedProduct}
@@ -61,7 +65,6 @@ const HomePage = ({ data, featuredProducts }) => {
           addToCart={addToCart}
         />
       )}
-      {/* <UploadDataFire/> */}
     </main>
   );
 };

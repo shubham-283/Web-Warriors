@@ -1,4 +1,3 @@
-
 import React from "react"
 import { FaFacebookF, FaInstagram, FaYoutube, FaPinterest } from "react-icons/fa"
 import { motion } from "framer-motion"
@@ -6,7 +5,7 @@ import { Link } from "react-router-dom"
 
 const Footer = () => {
   return (
-    <footer className="bg-gradient-to-r from-[#2C2C2C] to-[#3A3A3A] text-[#F8F8F8] py-16">
+    <footer className="bg-gradient-to-r from-[#232F3E] to-[#232F3E] text-[#F8F8F8] py-16 relative">
       <div className="container mx-auto px-4">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
           {/* Left Section */}
@@ -134,10 +133,25 @@ const Footer = () => {
             <p className="text-sm">&copy; {new Date().getFullYear()} Adaa Jaipur. All rights reserved.</p>
           </div>
         </motion.div>
+        <br/>
+
+        {/* Background Image at Bottom */}
+        <div className="opacity-100"
+          style={{
+            backgroundImage: 'url("/footerbg[1].png")',
+            backgroundSize: 'contain',
+            backgroundPosition: 'center',
+            width: '100%',
+            height: '100px', // Adjust height as needed for your design
+            position: 'absolute',
+            bottom: 0,
+            left: 0,
+            zIndex: 2,
+          }} 
+        />
       </div>
     </footer>
   )
 }
 
-export default Footer
-
+export default Footer;

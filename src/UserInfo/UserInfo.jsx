@@ -104,97 +104,110 @@ const UserProfile = () => {
   }
 
   return (
-    <div className="container mx-auto p-6 mt-16 bg-gradient-to-br from-pink-50 to-pink-50 ">
-      <h1 className="text-4xl font-bold text-center text-pink-700 mb-8 animate__animated animate__fadeIn">
-        Account Details
-      </h1>
-      <div className="max-w-4xl mx-auto bg-white shadow-lg rounded-lg p-8 animate__animated animate__fadeInUp">
-        <div className="mb-8 text-center">
-          {user.picture ? (
-            <img
-              src={user.picture}
-              alt="Profile"
-              className="w-32 h-32 rounded-full mx-auto border-4 border-pink-400 shadow-lg"
-            />
-          ) : (
-            <div className="w-32 h-32 rounded-full mx-auto bg-gray-200"></div>
-          )}
-        </div>
+    <div className="min-h-screen bg-gray-50 py-12 px-4 sm:px-6 lg:px-8 mt-16">
+      <div className="max-w-3xl mx-auto">
+        <div className="bg-white rounded-xl shadow-lg overflow-hidden">
+          <div className="bg-pink-600 px-6 py-8">
+            <div className="flex items-center">
+              {user.picture ? (
+                <img
+                  src={user.picture}
+                  alt="Profile"
+                  className="w-24 h-24 rounded-full border-4 border-white shadow-lg"
+                />
+              ) : (
+                <div className="w-24 h-24 rounded-full bg-gray-200" />
+              )}
+              <div className="ml-6">
+                <h1 className="text-3xl font-bold text-white">Profile Settings</h1>
+                <p className="text-pink-100 mt-1">{userData.email}</p>
+              </div>
+            </div>
+          </div>
 
-        <form onSubmit={(e) => e.preventDefault()}>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            <InputField
-              icon={<FaUser />}
-              label="Name"
-              name="name"
-              value={userData.name}
-              readOnly={!editMode}
-              onChange={handleChange}
-              error={errors.name}
-            />
-            <InputField
-              icon={<FaUser />}
-              label="Surname"
-              name="surname"
-              value={userData.surname}
-              readOnly={!editMode}
-              onChange={handleChange}
-              error={errors.surname}
-            />
+          <div className="p-8">
+            <form onSubmit={(e) => e.preventDefault()} className="space-y-6">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <InputField
+                  icon={<FaUser />}
+                  label="Name"
+                  name="name"
+                  value={userData.name}
+                  readOnly={!editMode}
+                  onChange={handleChange}
+                  error={errors.name}
+                />
+                <InputField
+                  icon={<FaUser />}
+                  label="Surname"
+                  name="surname"
+                  value={userData.surname}
+                  readOnly={!editMode}
+                  onChange={handleChange}
+                  error={errors.surname}
+                />
+              </div>
+
+              <InputField
+                icon={<FaEnvelope />}
+                label="Email"
+                name="email"
+                value={userData.email}
+                readOnly
+              />
+
+              <InputField
+                icon={<FaPhoneAlt />}
+                label="Phone"
+                name="phone"
+                value={userData.phone}
+                readOnly={!editMode}
+                onChange={handleChange}
+                error={errors.phone}
+              />
+
+              <InputField
+                icon={<FaMapMarkerAlt />}
+                label="Address"
+                name="address"
+                value={userData.address}
+                readOnly={!editMode}
+                onChange={handleChange}
+              />
+
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <InputField
+                  icon={<FaCity />}
+                  label="City"
+                  name="city"
+                  value={userData.city}
+                  readOnly={!editMode}
+                  onChange={handleChange}
+                />
+                <InputField
+                  icon={<FaMapMarkerAlt />}
+                  label="Pincode"
+                  name="pincode"
+                  value={userData.pincode}
+                  readOnly={!editMode}
+                  onChange={handleChange}
+                  error={errors.pincode}
+                />
+              </div>
+
+              <div className="flex justify-center pt-6">
+                <button
+                  type="button"
+                  onClick={() => (editMode ? handleSave() : setEditMode(true))}
+                  className={`px-8 py-3 rounded-full text-white font-semibold transform transition-all duration-300 hover:scale-105 shadow-md
+                    ${editMode ? 'bg-green-500 hover:bg-green-600' : 'bg-pink-600 hover:bg-pink-700'}`}
+                >
+                  {editMode ? 'Save Changes' : 'Edit Profile'}
+                </button>
+              </div>
+            </form>
           </div>
-          <InputField
-            icon={<FaEnvelope />}
-            label="Email"
-            name="email"
-            value={userData.email}
-            readOnly
-          />
-          <InputField
-            icon={<FaPhoneAlt />}
-            label="Phone"
-            name="phone"
-            value={userData.phone}
-            readOnly={!editMode}
-            onChange={handleChange}
-            error={errors.phone}
-          />
-          <InputField
-            icon={<FaMapMarkerAlt />}
-            label="Address"
-            name="address"
-            value={userData.address}
-            readOnly={!editMode}
-            onChange={handleChange}
-          />
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            <InputField
-              icon={<FaCity />}
-              label="City"
-              name="city"
-              value={userData.city}
-              readOnly={!editMode}
-              onChange={handleChange}
-            />
-            <InputField
-              icon={<FaMapMarkerAlt />}
-              label="Pincode"
-              name="pincode"
-              value={userData.pincode}
-              readOnly={!editMode}
-              onChange={handleChange}
-              error={errors.pincode}
-            />
-          </div>
-          <div className="text-center mt-6">
-            <button
-              type="button"
-              onClick={() => (editMode ? handleSave() : setEditMode(true))}
-              className="bg-pink-500 hover:bg-pink-600 text-white px-8 py-3 rounded-full shadow-md transition-transform duration-200 hover:-translate-y-1"
-            >
-              {editMode ? 'Save Changes' : 'Edit Profile'}
-            </button>
-          </div>
-        </form>
+        </div>
       </div>
 
       {notification.visible && (
@@ -208,26 +221,36 @@ const UserProfile = () => {
 };
 
 const InputField = ({ icon, label, name, value, readOnly, onChange, error }) => (
-  <div className="mb-4">
-    <div className="flex items-center">
-      <span className="text-white p-3 rounded-l-lg bg-gradient-to-tl from-pink-300 to-pink-600">
-        {icon}
-      </span>
-      <div className="w-full">
-        <label className="block text-sm font-medium text-pink-700 mb-1">{label}</label>
+  <div className="relative">
+    <div className="flex">
+      <div className={`flex items-center justify-center w-12 h-12 rounded-l-lg
+        ${readOnly ? 'bg-gray-100' : 'bg-pink-600'}`}>
+        <span className={`text-lg ${readOnly ? 'text-gray-500' : 'text-white'}`}>
+          {icon}
+        </span>
+      </div>
+      <div className="flex-1">
+        <label className="block text-sm font-medium text-gray-700 mb-1 ml-2">
+          {label}
+        </label>
         <input
           type="text"
           name={name}
           value={value}
           readOnly={readOnly}
           onChange={onChange}
-          className={`border rounded-r-lg w-full px-4 py-2 transition
-            ${readOnly ? 'bg-gray-100 text-gray-500' : 'bg-white text-pink-700 border-pink-200 focus:border-pink-500 focus:ring-pink-500'}
+          className={`w-full px-4 py-3 rounded-r-lg border transition-all duration-200
+            ${readOnly 
+              ? 'bg-gray-50 text-gray-500 border-gray-200' 
+              : 'bg-white text-gray-900 border-pink-200 focus:ring-2 focus:ring-pink-500 focus:border-pink-500'
+            }
             ${error ? 'border-red-500' : ''}`}
         />
       </div>
     </div>
-    {error && <p className="mt-1 text-sm text-red-500">{error}</p>}
+    {error && (
+      <p className="mt-1 text-sm text-red-500 ml-14">{error}</p>
+    )}
   </div>
 );
 

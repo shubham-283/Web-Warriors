@@ -4,7 +4,7 @@ import { Trash2, AlertCircle, Minus, Plus, ShoppingBag } from "lucide-react";
 import { useAuth } from "../hooks/useAuth";
 import Notification from "../Notification/Notification";
 import SurpriseComponent from "../SurpriseCustomer/SurpriseCustomer";
-import OrderConfirmationPage from "./OrderConfirmation";
+import CheckoutProcess from "./CheckoutProcess";
 
 const CartPage = () => {
   const { state, removeFromCart, updateQuantity, loading } = useCart();
@@ -12,44 +12,14 @@ const CartPage = () => {
   const [error, setError] = useState(null);
   const [notificationVisible, setNotificationVisible] = useState(false);
   const [notificationMessage, setNotificationMessage] = useState("");
-  const [orderPlaced, setOrderPlaced] = useState(false);
-  const [orderNumber, setOrderNumber] = useState("");
+  const [isCheckingOut, setIsCheckingOut] = useState(false);
 
   useEffect(() => {
-    // Clear error after 5 seconds
     if (error) {
       const timer = setTimeout(() => setError(null), 5000);
       return () => clearTimeout(timer);
     }
   }, [error]);
-
-  const handleCheckout = async () => {
-    try {
-      // Here you would typically:
-      // 1. Validate the cart
-      // 2. Process the payment
-      // 3. Create the order in your backend
-      // 4. Get the order number from the backend
-
-      // Simulating an API call with setTimeout
-      setTimeout(() => {
-        const generatedOrderNumber = "ORD" + Math.random().toString(36).substr(2, 9).toUpperCase();
-        setOrderNumber(generatedOrderNumber);
-        setOrderPlaced(true);
-      }, 1500);
-
-    } catch (err) {
-      setError("Failed to process checkout. Please try again.");
-    }
-  };
-
-  // If order is placed, show the confirmation page
-  if (orderPlaced) {
-    return <OrderConfirmationPage orderNumber={orderNumber} />;
-  }
-
-
-  
 
   const handleRemoveItem = async (item) => {
     try {
@@ -84,6 +54,10 @@ const CartPage = () => {
 
   const calculateSubtotal = (price, quantity) => (price * quantity).toFixed(2);
 
+  const handleProceedToCheckout = () => {
+    setIsCheckingOut(true);
+  };
+
   if (!isAuthenticated) {
     return (
       <div className="min-h-screen flex items-center justify-center bg-gray-50">
@@ -107,12 +81,20 @@ const CartPage = () => {
     );
   }
 
+  if (isCheckingOut) {
+    return (
+      <CheckoutProcess 
+        cartItems={state.items} 
+        totalPrice={parseFloat(calculateTotalPrice())} 
+      />
+    );
+  }
+
   return (
     <div className="min-h-screen bg-gradient-to-br from-pink-50 to-pink-50 pt-4 pb-12">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <SurpriseComponent />
         
-        {/* Error Display */}
         {error && (
           <div className="mb-4 p-4 bg-red-50 rounded-lg flex items-center gap-2">
             <AlertCircle className="w-5 h-5 text-red-500" />
@@ -120,7 +102,6 @@ const CartPage = () => {
           </div>
         )}
 
-        {/* Notification */}
         {notificationVisible && (
           <Notification
             message={notificationMessage}
@@ -138,7 +119,6 @@ const CartPage = () => {
           </div>
         ) : (
           <div className="space-y-4">
-            {/* Cart Items */}
             <div className="bg-white rounded-lg shadow overflow-hidden">
               {state.items.map((item, index) => (
                 <div
@@ -147,7 +127,6 @@ const CartPage = () => {
                     index !== state.items.length - 1 ? "border-b border-gray-200" : ""
                   }`}
                 >
-                  {/* Product Image */}
                   <div className="w-32 h-32 flex-shrink-0">
                     <img
                       src={item.image || "/placeholder.svg"}
@@ -156,7 +135,6 @@ const CartPage = () => {
                     />
                   </div>
 
-                  {/* Product Details */}
                   <div className="flex-1">
                     <h3 className="text-lg font-medium text-gray-900">{item.name}</h3>
                     <p className="mt-1 text-sm text-gray-500">
@@ -168,7 +146,6 @@ const CartPage = () => {
                     </p>
                   </div>
 
-                  {/* Quantity Controls */}
                   <div className="flex items-center gap-3">
                     <button
                       onClick={() => handleQuantityChange(item, item.quantity - 1)}
@@ -189,7 +166,6 @@ const CartPage = () => {
                     </button>
                   </div>
 
-                  {/* Subtotal */}
                   <div className="text-right">
                     <p className="text-sm text-gray-500">Subtotal</p>
                     <p className="text-lg font-medium text-gray-900">
@@ -197,7 +173,6 @@ const CartPage = () => {
                     </p>
                   </div>
 
-                  {/* Remove Button */}
                   <button
                     onClick={() => handleRemoveItem(item)}
                     className="p-2 text-gray-400 hover:text-red-500 transition-colors"
@@ -209,7 +184,6 @@ const CartPage = () => {
               ))}
             </div>
 
-            {/* Order Summary */}
             <div className="bg-white rounded-lg shadow p-6">
               <h2 className="text-lg font-medium text-gray-900 mb-4">Order Summary</h2>
               <div className="space-y-2">
@@ -229,7 +203,7 @@ const CartPage = () => {
                 </div>
               </div>
               <button 
-                onClick={handleCheckout}
+                onClick={handleProceedToCheckout}
                 className="w-full mt-6 bg-pink-500 text-white py-3 px-4 rounded-lg hover:bg-pink-600 transition-colors focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-pink-500"
               >
                 Proceed to Checkout

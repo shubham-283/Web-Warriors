@@ -23,6 +23,11 @@ import ShippingPolicy from './Footer/ShippingPolicy/ShippingPolicy.jsx';
 import TermsOfService from './Footer/TermsOfService/TermsOfService.jsx';
 import PrivacyPolicy from './Footer/PrivacyPolicy/PrivacyPolicy.jsx';
 import SalePage from './Footer/Sale/Sale.jsx';
+import OrderTracking from './ProductTracking/ProductTracking.jsx';
+import UserOrders from './UserOrders/Userorders.jsx';
+import CheckoutProcess from './AddToCart/CheckoutProcess.jsx';
+import Chatbot from './Chatbot/Chatbot.jsx';
+import ReturnsPage from './ReturnOrder/ReturnOrder.jsx';
 
 const ScrollToTop = () => {
   const { pathname } = useLocation();
@@ -50,6 +55,7 @@ const App = () => {
         <ScrollToTop />
         <ProductFetcher setProducts={setProducts} />
         <NavbarAdaa/>
+        <Chatbot productData={products}/>
         <CartProvider>
           <WishlistProvider>
             <Routes>
@@ -67,6 +73,10 @@ const App = () => {
               <Route path='/terms-of-service' element={<TermsOfService/>}/>
               <Route path='/privacy-policy' element={<PrivacyPolicy/>}/>
               <Route path='/sale' element={<SalePage/>}/>
+              <Route path='/orders' element={<UserOrders/>}/>
+              {/* <Route path="/checkout" element={<CheckoutProcess />} /> */}
+              <Route path="/return-requests" element={<ReturnsPage />} />
+              {/* <Route path="/chatbot" element={<Chatbot productData={products}/>} /> */}
             </Routes>
           </WishlistProvider>
         </CartProvider>

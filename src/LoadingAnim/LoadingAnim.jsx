@@ -1,62 +1,37 @@
 import React from 'react';
 
-const LoadingAnimation = ({loadingText}) => {
+const LoadingAnimation = ({ loadingText }) => {
   return (
-    <div className="flex flex-col items-center justify-center h-screen bg-gradient-to-br from-white to-gray-100 relative">
-      {/* Rotating Mandala Design */}
-      <div className="relative w-24 h-24">
-        {/* Outer Circle */}
-        <div className="absolute inset-0 border-6 border-dashed border-pink-500 rounded-full animate-spin-slow"></div>
-        {/* Inner Circle */}
-        <div className="absolute inset-2 border-6 border-dashed border-purple-500 rounded-full animate-spin-reverse"></div>
-        {/* Central Mandala with Bouncing Effect */}
-        <div className="absolute inset-6 w-5 h-5 bg-gradient-to-r from-pink-500 to-purple-500 rounded-full shadow-lg animate-bounce-smooth"></div> {/* Decreased size of the central ball */}
+    <div className="fixed inset-0 flex flex-col items-center justify-center bg-white">
+      {/* Main Loading Container */}
+      <div className="relative w-16 h-16">
+        {/* Circular Loader Rings */}
+        <div className="absolute inset-0">
+          <div className="w-full h-full border-4 border-t-pink-500 border-r-pink-300 border-b-pink-200 border-l-pink-100 rounded-full animate-spin-custom"></div>
+        </div>
+        
+        {/* Inner Pulse Circle */}
+        <div className="absolute inset-2">
+          <div className="w-full h-full bg-pink-50 rounded-full animate-pulse"></div>
+        </div>
       </div>
 
-      {/* Updated Text for User Satisfaction */}
-      <p className="mt-4 text-lg font-semibold text-gray-700 tracking-wider text-center">
-        {loadingText}
-      </p>
+      {/* Loading Text */}
+      <div className="mt-4">
+        <p className="text-gray-600 font-medium text-sm tracking-wide">
+          {loadingText || 'Loading...'}
+        </p>
+      </div>
 
-      {/* Inline Styles for Keyframes */}
+      {/* Custom Animations */}
       <style>{`
-        @keyframes spin {
-          0% {
-            transform: rotate(0deg);
-          }
-          100% {
-            transform: rotate(360deg);
-          }
+        @keyframes spin-custom {
+          0% { transform: rotate(0deg); }
+          100% { transform: rotate(360deg); }
         }
 
-        @keyframes spin-reverse {
-          0% {
-            transform: rotate(360deg);
-          }
-          100% {
-            transform: rotate(0deg);
-          }
-        }
-
-        @keyframes bounce-smooth {
-          0%, 100% {
-            transform: translateY(0);
-          }
-          50% {
-            transform: translateY(65px); /* Adjust height for bounce */
-          }
-        }
-
-        .animate-spin-slow {
-          animation: spin 4s linear infinite; /* Smooth clockwise rotation */
-        }
-
-        .animate-spin-reverse {
-          animation: spin-reverse 4s linear infinite; /* Smooth counterclockwise rotation */
-        }
-
-        .animate-bounce-smooth {
-          animation: bounce-smooth 1.75s ease-in-out infinite; /* Smooth bouncing effect */
+        .animate-spin-custom {
+          animation: spin-custom 1s linear infinite;
         }
       `}</style>
     </div>
