@@ -50,6 +50,7 @@ const App = () => {
       authorizationParams={{
         redirect_uri: window.location.origin,
       }}
+      cacheLocation="localstorage"
     >
       <Router>
         <ScrollToTop />
