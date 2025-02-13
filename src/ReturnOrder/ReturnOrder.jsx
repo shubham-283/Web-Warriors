@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
-import { ChevronDownIcon } from '@heroicons/react/20/solid';
-import Select from 'react-select'; // Import react-select
-
+import Select from 'react-select';
+import { doc, addDoc, collection, serverTimestamp } from 'firebase/firestore';
+import { db } from '../firebase-config.js'; // Assuming this is your Firebase config file path
 
 const ReturnsPage = () => {
   const [formData, setFormData] = useState({
@@ -12,8 +12,11 @@ const ReturnsPage = () => {
     purchaseDate: '',
     returnReason: '',
     condition: '',
-    preferredRefundMethod: ''
+    preferredRefundMethod: '',
   });
+
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitStatus, setSubmitStatus] = useState({ type: '', message: '' });
 
   const handleChange = (e) => {
     const { id, value } = e.target;
@@ -23,9 +26,49 @@ const ReturnsPage = () => {
     }));
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log('Return Request Submitted:', formData);
+    setIsSubmitting(true);
+    setSubmitStatus({ type: '', message: '' });
+
+    try {
+      // Create return request object with timestamp
+      const returnRequest = {
+        ...formData,
+        status: 'pending',
+        createdAt: serverTimestamp(),
+        updatedAt: serverTimestamp()
+      };
+
+      // Add document to 'returnRequests' collection
+      const docRef = await addDoc(collection(db, 'returnRequests'), returnRequest);
+
+      setSubmitStatus({
+        type: 'success',
+        message: `Return request submitted successfully! Reference ID: ${docRef.id}`
+      });
+
+      // Reset form
+      setFormData({
+        orderId: '',
+        contactNumber: '',
+        email: '',
+        productName: '',
+        purchaseDate: '',
+        returnReason: '',
+        condition: '',
+        preferredRefundMethod: ''
+      });
+
+    } catch (error) {
+      console.error('Error submitting return request:', error);
+      setSubmitStatus({
+        type: 'error',
+        message: 'Error submitting return request. Please try again.'
+      });
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   const customSelectStyles = {
@@ -65,12 +108,12 @@ const ReturnsPage = () => {
     { value: 'damaged', label: 'Damaged' }
   ];
 
-    const refundOptions = [
-        { value: '', label: 'Select refund method' },
-        { value: 'original', label: 'Original Payment Method' },
-        { value: 'store-credit', label: 'Store Credit' },
-        { value: 'bank-transfer', label: 'Bank Transfer' }
-    ];
+  const refundOptions = [
+    { value: '', label: 'Select refund method' },
+    { value: 'original', label: 'Original Payment Method' },
+    { value: 'store-credit', label: 'Store Credit' },
+    { value: 'bank-transfer', label: 'Bank Transfer' }
+  ];
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-pink-50 to-pink-100 flex items-center justify-center p-16 mt-20">
@@ -78,6 +121,17 @@ const ReturnsPage = () => {
         <div className="bg-gradient-to-r from-pink-400 to-pink-600 text-transparent bg-clip-text">
           <h2 className="text-3xl font-bold text-center mb-8">Return Request Form</h2>
         </div>
+
+        {submitStatus.message && (
+          <div className={`mb-6 p-4 rounded-lg ${
+            submitStatus.type === 'success' 
+              ? 'bg-green-100 text-green-700 border border-green-200'
+              : 'bg-red-100 text-red-700 border border-red-200'
+          }`}>
+            {submitStatus.message}
+          </div>
+        )}
+
         <form onSubmit={handleSubmit} className="space-y-6">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div>
@@ -184,7 +238,7 @@ const ReturnsPage = () => {
             <label className="block text-pink-700 font-medium mb-2" htmlFor="preferredRefundMethod">
               Preferred Refund Method *
             </label>
-             <Select
+            <Select
               id="preferredRefundMethod"
               value={formData.preferredRefundMethod ? { value: formData.preferredRefundMethod, label: refundOptions.find(option => option.value === formData.preferredRefundMethod)?.label || '' } : null}
               onChange={(selectedOption) => handleChange({ target: { id: 'preferredRefundMethod', value: selectedOption ? selectedOption.value : '' } })}
@@ -197,9 +251,12 @@ const ReturnsPage = () => {
 
           <button
             type="submit"
-            className="w-full py-3 bg-gradient-to-r from-pink-400 to-pink-600 text-white font-semibold rounded-lg hover:from-pink-500 hover:to-pink-700 focus:outline-none focus:ring-2 focus:ring-pink-500 transition-all duration-200 shadow-lg hover:shadow-xl"
+            disabled={isSubmitting}
+            className={`w-full py-3 bg-gradient-to-r from-pink-400 to-pink-600 text-white font-semibold rounded-lg 
+              ${!isSubmitting ? 'hover:from-pink-500 hover:to-pink-700' : 'opacity-75 cursor-not-allowed'}
+              focus:outline-none focus:ring-2 focus:ring-pink-500 transition-all duration-200 shadow-lg hover:shadow-xl`}
           >
-            Submit Return Request
+            {isSubmitting ? 'Submitting...' : 'Submit Return Request'}
           </button>
         </form>
       </div>
